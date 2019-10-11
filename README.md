@@ -7,8 +7,8 @@ Structures and grammar exist for varifying adherence to protocol,
 headers logic, conformance to contract.
 
 ```
-using (var response = httpClient.Capture(request)) {
-    response.Response.StatusCode.Should().Be(StatusCode.OK);
+using (var interaction = Capture(request)) {
+    interaction.Response.StatusCode.Should().Be(StatusCode.OK);
 }
 ```
 
