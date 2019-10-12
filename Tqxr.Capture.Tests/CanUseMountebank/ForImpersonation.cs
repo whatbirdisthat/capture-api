@@ -18,22 +18,26 @@ namespace Tqxr.Capture.Tests.CanUseMountebank
                 .UseEnvironment("Development")
                 .UseStartup(nameof(ServerAPI))
                 .ConfigureServices(services => { });
-            
+
+            ServerAPI.TestConfiguration.MountebankUrl.Should().Be("http://localhost:2525");
         }
-    }
-
-    struct TestConfiguration
-    {
-        public string MountebankUrl { get; set; }
-    }
-
-    public class ServerAPI : Startup
-    {
-        static TestConfiguration TestConfiguration { get; set; }
-
-        public ServerAPI(IConfiguration configuration) : base(configuration)
+        
+        
+        struct TestConfiguration
         {
-            TestConfiguration = configuration.As<TestConfiguration>();
+            public string MountebankUrl { get; set; }
         }
+
+        class ServerAPI : Startup
+        {
+            internal static TestConfiguration TestConfiguration { get; set; }
+
+            public ServerAPI(IConfiguration configuration) : base(configuration)
+            {
+                TestConfiguration = configuration.As<TestConfiguration>();
+            }
+        }        
     }
+
+
 }
