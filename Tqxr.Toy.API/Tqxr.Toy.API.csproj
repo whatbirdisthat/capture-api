@@ -7,7 +7,7 @@
     <ItemGroup>
     </ItemGroup>
     <Target Name="format">
-        <MSBuild Targets="format" Projects="@(TestProjects)"/>
+        <MSBuild Targets="format" Projects="@(TestProjects)" />
     </Target>
 
 

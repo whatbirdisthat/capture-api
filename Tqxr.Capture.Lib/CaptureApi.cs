@@ -1,33 +1,37 @@
-﻿using System;
+﻿using System.Net.Http;
+using MbDotNet;
 using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.TestHost;
 
 namespace Tqxr.Capture.Lib
 {
-    public class CaptureApi : IStartup
+    public class CaptureApi
     {
-        public static IWebHostBuilder ControlledAPI
-        {
-            get
-            {
-                return WebHost.CreateDefaultBuilder()
-                    .UseEnvironment("Development")
-                    .UseStartup<CaptureApi>()
-                    .ConfigureServices(services => { });
+        private TestServer _systemUnderTest;
+        private HttpClient _httpClient;
+        private MountebankClient _mountebank;
 
-            }
+        public HttpClient HttpClient
+        {
+            get => _httpClient;
         }
 
-        public virtual void Configure(IApplicationBuilder app)
+        public CaptureApi(TestServer systemUnderTest)
         {
-            throw new NotImplementedException();
+            this._systemUnderTest = systemUnderTest;
+            this._httpClient = systemUnderTest.CreateClient();
+            this._mountebank = new MountebankClient();
         }
 
-        public virtual IServiceProvider ConfigureServices(IServiceCollection services)
+        public static CaptureApi ControlledApi(string startupClass)
         {
-            throw new NotImplementedException();
+            IWebHostBuilder webHostBuilder = WebHost.CreateDefaultBuilder()
+                .UseEnvironment("Development")
+                .UseStartup(startupClass)
+                .ConfigureServices(services => { });
+            TestServer testServer = new TestServer(webHostBuilder);
+            return new CaptureApi(testServer);
         }
     }
 }

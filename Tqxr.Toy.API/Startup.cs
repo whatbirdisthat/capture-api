@@ -8,9 +8,12 @@ namespace Tqxr.Toy.API
 {
     public class Startup
     {
+        public static string TheVariable { get; set; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            TheVariable = "Hello.";
         }
 
         public IConfiguration Configuration { get; }
@@ -35,10 +38,7 @@ namespace Tqxr.Toy.API
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
 }

@@ -1,5 +1,6 @@
 using FluentAssertions;
 using Tqxr.Capture.Lib;
+using Tqxr.Toy.API;
 using Xunit;
 
 namespace Tqxr.Capture.Tests
@@ -9,8 +10,10 @@ namespace Tqxr.Capture.Tests
         [Fact]
         public void Test1()
         {
-            var class1 = new CaptureApi();
+            var startupName = typeof(Startup).Assembly.FullName;
+            var class1 = CaptureApi.ControlledApi(startupName);
             class1.Should().NotBeNull();
+            Startup.TheVariable.Should().NotBeNullOrEmpty();
         }
     }
 }
