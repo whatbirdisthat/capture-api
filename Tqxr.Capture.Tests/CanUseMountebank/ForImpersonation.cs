@@ -1,6 +1,9 @@
 using System;
+using FluentAssertions;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Tqxr.Toy.API;
 using Xunit;
 
 namespace Tqxr.Capture.Tests.CanUseMountebank
@@ -12,23 +15,25 @@ namespace Tqxr.Capture.Tests.CanUseMountebank
         {
             IWebHostBuilder forFakeWebHost = WebHost.CreateDefaultBuilder();
             forFakeWebHost
-                .UseEnvironment("development")
-                .UseStartup(typeof(ServerAPI))
+                .UseEnvironment("Development")
+                .UseStartup(nameof(ServerAPI))
                 .ConfigureServices(services => { });
             
         }
     }
 
-    public class ServerAPI : IStartup
+    struct TestConfiguration
     {
-        public void Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder app)
-        {
-            throw new NotImplementedException();
-        }
+        public string MountebankUrl { get; set; }
+    }
 
-        public IServiceProvider ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection services)
+    public class ServerAPI : Startup
+    {
+        static TestConfiguration TestConfiguration { get; set; }
+
+        public ServerAPI(IConfiguration configuration) : base(configuration)
         {
-            throw new NotImplementedException();
+            TestConfiguration = configuration.As<TestConfiguration>();
         }
     }
 }
