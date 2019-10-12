@@ -1,4 +1,3 @@
-using FluentAssertions;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Tqxr.Capture.Lib.OperatingModel;
@@ -12,7 +11,7 @@ namespace Tqxr.Capture.Tests.CanUseMountebank
         public void ToCreateANewImposter()
         {
             IWebHostBuilder forFakeWebHost =
-                WebHost.CreateDefaultBuilder()
+                    WebHost.CreateDefaultBuilder()
                     .UseEnvironment("Development")
                     .UseStartup<ServerApi>()
                     .ConfigureServices(services => { });
