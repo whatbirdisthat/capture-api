@@ -9,7 +9,13 @@ Content-Length: 962
   "protocol": "http",
   "stubs": [
     {
-      "responses": [{ "is": { "statusCode": 400 } }],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 400
+          }
+        }
+      ],
       "predicates": [
         {
           "equals": {
@@ -25,23 +31,63 @@ Content-Length: 962
           }
         },
         {
-          "equals": { "body": "hello, world" },
+          "equals": {
+            "body": "hello, world"
+          },
           "caseSensitive": true,
           "except": "!$"
         }
       ]
     },
     {
-      "responses": [{ "is": { "statusCode": 406 } }],
-      "predicates": [{ "equals": { "headers": { "Accept": "application/xml" } } }]
+      "responses": [
+        {
+          "is": {
+            "statusCode": 406
+          }
+        }
+      ],
+      "predicates": [
+        {
+          "equals": {
+            "headers": {
+              "Accept": "application/xml"
+            }
+          }
+        }
+      ]
     },
     {
-      "responses": [{ "is": { "statusCode": 405 } }],
-      "predicates": [{ "equals": { "method": "PUT" } }]
+      "responses": [
+        {
+          "is": {
+            "statusCode": 405
+          }
+        }
+      ],
+      "predicates": [
+        {
+          "equals": {
+            "method": "PUT"
+          }
+        }
+      ]
     },
     {
-      "responses": [{ "is": { "statusCode": 500 } }],
-      "predicates": [{ "equals": { "method": "PUT" } }]
+      "responses": [
+        {
+          "is": {
+            "statusCode": 500
+          }
+        }
+      ],
+      "predicates": [
+        {
+          "equals": {
+            "method": "PUT"
+          }
+        }
+      ]
     }
   ]
 }

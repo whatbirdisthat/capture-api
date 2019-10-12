@@ -20,4 +20,10 @@
       <ProjectReference Include="..\Tqxr.Toy.API\Tqxr.Toy.API.csproj" />
     </ItemGroup>
 
+    <Target Name="format">
+        <MSBuild Targets="format" Projects="@(TestProjects)" />
+    </Target>
+
+
+
 </Project>

@@ -33,4 +33,11 @@
     </Reference>
   </ItemGroup>
 
+    <Target Name="format">
+        <MSBuild Targets="format" Projects="@(TestProjects)" />
+    </Target>
+
+
+
+
 </Project>

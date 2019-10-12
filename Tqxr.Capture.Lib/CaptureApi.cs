@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Tqxr.Capture.Lib
 {
@@ -18,12 +20,12 @@ namespace Tqxr.Capture.Lib
             }
         }
 
-        public virtual void Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder app)
+        public virtual void Configure(IApplicationBuilder app)
         {
             throw new NotImplementedException();
         }
 
-        public virtual IServiceProvider ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection services)
+        public virtual IServiceProvider ConfigureServices(IServiceCollection services)
         {
             throw new NotImplementedException();
         }

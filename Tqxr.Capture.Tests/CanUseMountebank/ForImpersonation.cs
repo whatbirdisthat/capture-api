@@ -11,15 +11,14 @@ namespace Tqxr.Capture.Tests.CanUseMountebank
         public void ToCreateANewImposter()
         {
             IWebHostBuilder forFakeWebHost =
-                    WebHost.CreateDefaultBuilder()
+                WebHost.CreateDefaultBuilder()
                     .UseEnvironment("Development")
                     .UseStartup<ServerApi>()
                     .ConfigureServices(services => { });
 
             forFakeWebHost.Build().Start();
 
-            //            ServerApi.TestConfiguration.MountebankUrl.Should().Be("http://localhost:2525");
+//            ServerApi.TestConfiguration.MountebankUrl.Should().Be("http://localhost:2525");
         }
-
     }
 }
