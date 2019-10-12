@@ -9,7 +9,7 @@ namespace Tqxr.Capture.Tests
         [Fact]
         public void Test1()
         {
-            var class1 = new Class1();
+            var class1 = new CaptureApi();
             class1.Should().NotBeNull();
         }
     }
