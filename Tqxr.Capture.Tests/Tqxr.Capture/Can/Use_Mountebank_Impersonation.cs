@@ -1,3 +1,4 @@
+using System.Net;
 using System.Net.Http;
 using FluentAssertions;
 using Tqxr.Capture.Lib;
@@ -26,8 +27,10 @@ namespace Tqxr.Capture.Tests.Tqxr.Capture.Can
 
             hello.Should().Be(expected);
 
+
             var theImposter = forFakeWebHost.MountebankClient.CreateHttpImposter(
                 9292, "A unit test", false);
+            theImposter.AddStub().ReturnsJson(HttpStatusCode.OK, new {P1 = "property one IMPERSONATED"});
 
             forFakeWebHost.MountebankClient.Submit(theImposter);
 
@@ -51,6 +54,12 @@ namespace Tqxr.Capture.Tests.Tqxr.Capture.Can
 }";
 
             hello2.Should().Be(expected2);
+
+            var impostorHello = new HttpClient().GetStringAsync("http://localhost:9292/").Result;
+
+            impostorHello.Should().Be(@"{
+    ""P1"": ""property one IMPERSONATED""
+}");
         }
     }
 }
