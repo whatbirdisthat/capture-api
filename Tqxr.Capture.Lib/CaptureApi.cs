@@ -1,4 +1,5 @@
 ﻿using System.Net.Http;
+using System.Text.Json;
 using MbDotNet;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
@@ -15,6 +16,17 @@ namespace Tqxr.Capture.Lib
         public HttpClient HttpClient
         {
             get => _httpClient;
+        }
+
+        public MountebankClient MountebankClient
+        {
+            get => _mountebank;
+        }
+
+        public T[] ProvideAll<T>(string endpoint)
+        {
+            string controlledApiResponse = this.HttpClient.GetStringAsync("/weatherforecast").Result;
+            return JsonSerializer.Deserialize<T[]>(controlledApiResponse);
         }
 
         public CaptureApi(TestServer systemUnderTest)
