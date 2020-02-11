@@ -1,0 +1,94 @@
+POST /imposters HTTP/1.1
+Host: localhost:2525
+Accept: application/json
+Content-Type: application/json
+Content-Length: 962
+
+{
+  "port": 4545,
+  "protocol": "http",
+  "stubs": [
+    {
+      "responses": [
+        {
+          "is": {
+            "statusCode": 400
+          }
+        }
+      ],
+      "predicates": [
+        {
+          "equals": {
+            "method": "POST",
+            "path": "/test",
+            "query": {
+              "first": "1",
+              "second": "2"
+            },
+            "headers": {
+              "Accept": "text/plain"
+            }
+          }
+        },
+        {
+          "equals": {
+            "body": "hello, world"
+          },
+          "caseSensitive": true,
+          "except": "!$"
+        }
+      ]
+    },
+    {
+      "responses": [
+        {
+          "is": {
+            "statusCode": 406
+          }
+        }
+      ],
+      "predicates": [
+        {
+          "equals": {
+            "headers": {
+              "Accept": "application/xml"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "responses": [
+        {
+          "is": {
+            "statusCode": 405
+          }
+        }
+      ],
+      "predicates": [
+        {
+          "equals": {
+            "method": "PUT"
+          }
+        }
+      ]
+    },
+    {
+      "responses": [
+        {
+          "is": {
+            "statusCode": 500
+          }
+        }
+      ],
+      "predicates": [
+        {
+          "equals": {
+            "method": "PUT"
+          }
+        }
+      ]
+    }
+  ]
+}
+
